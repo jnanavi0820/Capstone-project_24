@@ -1,0 +1,44 @@
+from flask import Flask, render_template, request, redirect, url_for
+
+app = Flask(__name__)
+
+# In-memory storage for demo purposes
+medicine_data = []
+reminders = []
+
+@app.route('/')
+def home():
+    return render_template('home.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        role = request.form['role']
+        return redirect(url_for('medicine'))
+    return render_template('login.html')
+
+@app.route('/medicine', methods=['GET', 'POST'])
+def medicine():
+    if request.method == 'POST':
+        medname = request.form['medname']
+        expiry = request.form['expiry']
+        medicine_data.append({'medname': medname, 'expiry': expiry})
+    return render_template('medicine.html', medicine_data=medicine_data)
+
+@app.route('/donate', methods=['GET', 'POST'])
+def donate():
+    if request.method == 'POST':
+        # Handle donation form
+        pass
+    return render_template('donate.html')
+
+@app.route('/reminders', methods=['GET', 'POST'])
+def reminders_page():
+    if request.method == 'POST':
+        prescription = request.form['prescription']
+        time = request.form['time']
+        reminders.append({'prescription': prescription, 'time': time})
+    return render_template('reminders.html', reminders=reminders)
+
+if __name__ == '__main__':
+    app.run(debug=True)
