@@ -1,0 +1,2 @@
+npm init -y  # Initialize the project
+npm install express pg body-parser dotenv  # Install Express, PostgreSQL client, body-parser, and dotenv for environment variables
