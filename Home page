@@ -1,0 +1,22 @@
+<!-- home.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Prevent Medicine Wastage</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Mechanism to Prevent Medicine from Getting Wasted</h1>
+        <nav>
+            <a href="/login">Login</a>
+            <a href="/donate">Donate</a>
+            <a href="/reminders">Reminders</a>
+        </nav>
+    </header>
+    <section>
+        <h2>Welcome!</h2>
+        <p>Join us in the fight to reduce medicine waste. Track your medicines, set reminders, and donate unused medications.</p>
+    </section>
+</body>
+</html>
