@@ -1,0 +1,28 @@
+-- Create a database (run this in psql)
+CREATE DATABASE medicine_wastage;
+
+-- Connect to the database
+\c medicine_wastage;
+
+-- Create a table to store medicines
+CREATE TABLE medicines (
+    id SERIAL PRIMARY KEY,
+    medname VARCHAR(255) NOT NULL,
+    expiry DATE NOT NULL
+);
+
+-- Create a table to store donation details
+CREATE TABLE donations (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    address TEXT NOT NULL,
+    medicine TEXT NOT NULL
+);
+
+-- Create a table to store reminders
+CREATE TABLE reminders (
+    id SERIAL PRIMARY KEY,
+    prescription TEXT NOT NULL,
+    time TIME NOT NULL
+);
