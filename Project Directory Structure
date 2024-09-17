@@ -1,0 +1,11 @@
+/project-root
+    /static
+        styles.css        # CSS styles
+    /templates
+        home.html         # HTML templates (e.g., home, medicine, donate, reminders)
+        medicine.html
+        donate.html
+        reminders.html
+    app.js                # Main server file (Node.js backend)
+    .env                  # Environment variables (PostgreSQL connection info)
+    package.json          # Project dependencies
