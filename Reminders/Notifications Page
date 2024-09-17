@@ -1,0 +1,36 @@
+<!-- reminders.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Medicine Reminders</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Set Medicine Reminders</h1>
+    <form action="/reminders" method="post">
+        <label for="prescription">Prescription Details:</label>
+        <textarea id="prescription" name="prescription" required></textarea><br>
+        <label for="time">Reminder Time:</label>
+        <input type="time" id="time" name="time" required><br>
+        <button type="submit">Set Reminder</button>
+    </form>
+
+    <h2>Your Reminders</h2>
+    <ul id="reminderList">
+        <!-- Reminder details dynamically displayed -->
+    </ul>
+
+    <audio id="reminderSound" src="reminder-sound.mp3" preload="auto"></audio>
+</body>
+
+<script>
+    // Example notification sound on reminder trigger (pseudo-code)
+    const playReminderSound = () => {
+        const sound = document.getElementById('reminderSound');
+        sound.play();
+    };
+
+    // This can be triggered by backend logic (server-side cron jobs or a scheduler)
+    playReminderSound();
+</script>
+</html>
