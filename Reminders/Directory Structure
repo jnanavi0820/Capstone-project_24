@@ -1,0 +1,11 @@
+/project-root
+    /static
+        styles.css        # CSS styles for the pages
+        reminder-sound.mp3 # Notification sound for reminders
+    /templates
+        home.html         # Home page template
+        login.html        # Login page for patients, pharmacies, NGOs
+        medicine.html     # Medicine inventory page
+        donate.html       # Donation page
+        reminders.html    # Reminders page
+    app.py                # Flask or Node.js backend (Python or JS logic)
