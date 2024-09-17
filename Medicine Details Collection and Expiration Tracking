@@ -1,0 +1,23 @@
+<!-- medicine.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Medicine Inventory</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Enter Medicine Details</h1>
+    <form action="/medicine" method="post">
+        <label for="medname">Medicine Name:</label>
+        <input type="text" id="medname" name="medname" required><br>
+        <label for="expiry">Expiration Date:</label>
+        <input type="date" id="expiry" name="expiry" required><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <h2>Your Medicines</h2>
+    <ul id="medList">
+        <!-- List of user medicines will be dynamically rendered here -->
+    </ul>
+</body>
+</html>
