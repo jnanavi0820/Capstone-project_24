@@ -1,0 +1,96 @@
+// app.js
+const express = require('express');
+const bodyParser = require('body-parser');
+const { Pool } = require('pg');
+require('dotenv').config();
+
+const app = express();
+const port = process.env.PORT || 3000;
+
+// PostgreSQL Connection
+const pool = new Pool({
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT,
+});
+
+// Middleware to parse form data
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+// Set view engine if using HTML templates
+app.set('view engine', 'ejs');  // Optional if using EJS templates for HTML
+
+// Routes
+
+// Home route
+app.get('/', (req, res) => {
+    res.send('Welcome to the Mechanism to Prevent Medicine from Getting Wasted!');
+});
+
+// Medicine submission form
+app.get('/medicine', (req, res) => {
+    res.sendFile(__dirname + '/templates/medicine.html');  // Adjust based on your file structure
+});
+
+// Handle medicine form submission
+app.post('/medicine', async (req, res) => {
+    const { medname, expiry } = req.body;
+    try {
+        const result = await pool.query(
+            'INSERT INTO medicines (medname, expiry) VALUES ($1, $2) RETURNING *',
+            [medname, expiry]
+        );
+        res.send(`Medicine added: ${result.rows[0].medname} (Expiry: ${result.rows[0].expiry})`);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error saving medicine to the database.');
+    }
+});
+
+// Donation form route
+app.get('/donate', (req, res) => {
+    res.sendFile(__dirname + '/templates/donate.html');
+});
+
+// Handle donation form submission
+app.post('/donate', async (req, res) => {
+    const { name, phone, address, medicine } = req.body;
+    try {
+        const result = await pool.query(
+            'INSERT INTO donations (name, phone, address, medicine) VALUES ($1, $2, $3, $4) RETURNING *',
+            [name, phone, address, medicine]
+        );
+        res.send(`Donation added for ${result.rows[0].name}`);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error saving donation to the database.');
+    }
+});
+
+// Reminder form route
+app.get('/reminders', (req, res) => {
+    res.sendFile(__dirname + '/templates/reminders.html');
+});
+
+// Handle reminder form submission
+app.post('/reminders', async (req, res) => {
+    const { prescription, time } = req.body;
+    try {
+        const result = await pool.query(
+            'INSERT INTO reminders (prescription, time) VALUES ($1, $2) RETURNING *',
+            [prescription, time]
+        );
+        res.send(`Reminder added for prescription: ${result.rows[0].prescription} at ${result.rows[0].time}`);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error saving reminder to the database.');
+    }
+});
+
+// Start server
+app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
+});
